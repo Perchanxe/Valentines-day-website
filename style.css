@@ -279,3 +279,57 @@ button:hover svg {
     transform: scale(1.2);
 }
 /*#endregion */
+
+
+/* #region poem animations */
+@keyframes floatUp {
+    0% {
+        transform: tranlateX(0) translateY(0) rotate(-45deg);
+        opacity: 1;
+    }
+    20% {
+        transform: translateX(-30px) translateY(-20vh) rotate(-45deg);
+    }
+    40% {
+        transform: translateX(30px) translateY(-40vh) rotate(-45deg);
+    }
+    60% {
+        transform: translateX(-30px) translateY(-60vh) rotate(-45deg);
+    }
+    80% {
+        transform: translateX(30px) translateY(-80vh) rotate(-45deg);
+    }
+    100% {
+        transform: translateX(0) translateY(-100vh) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(var(--heart-color), var(--heart-color2) 240%);
+    transform: rotate(-45deg);
+    animation: floatUp 5s linear infinite;
+}
+
+.floating-heart:before, .floating-heart:after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(var(--heart-color), var(--heart-color2) 240%);
+    border-radius: 50px;
+}
+
+.floating-heart:before {
+    top: 0;
+    left: 25px;
+}
+
+.floating-heart:after {
+    top: -25px;
+    left: 0;
+}

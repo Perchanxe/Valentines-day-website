@@ -13,6 +13,8 @@ let poemCounter = 0;
 
 let hearts = [];
 
+let activeHearts = 0;
+
 //#endregion
 
 // #region constants
@@ -90,6 +92,8 @@ yesButton.addEventListener('click', () => {
 
             document.body.classList.add('bg-poem');
             document.body.classList.remove('bg-change5');
+
+            startFloatingHearts();
         }
 
 });
@@ -260,6 +264,50 @@ function clearHearts() {
 
     heartCounter = 0;
     heartCounterText.textContent = `${heartCounter}`;
+}
+
+//#endregion
+
+//#region heart animation
+function startFloatingHearts() {
+    let activeHearts = 0;
+
+    function createFloatingHeart() {
+        if (activeHearts >= 5) {
+            return;
+        }
+
+        let heartCount = Math.floor(Math.random() * 5) + 1;
+
+        for (let i = 0; i < heartCount; i++) {
+            if (activeHearts >= 5) {
+                break;
+            }
+
+            const floatHeart = document.createElement("div");
+            floatHeart.classList.add("floating-heart");
+
+            floatHeart.style.left = Math.random() * (window.innerWidth - 50) + "px";
+
+
+            floatHeart.style.setProperty("--heart-color", `hsl(${Math.random() * 360}, 100%, 70%)`);
+            floatHeart.style.setProperty("--heart-color2", `hsl(${Math.random() * 360}, 100%, 50%)`);
+
+            document.body.appendChild(floatHeart);
+            activeHearts++;
+
+            setTimeout(() => {
+                floatHeart.remove();
+                activeHearts--;
+            }, 10000);
+        }
+    }
+
+    setInterval(() => {
+        if (document.body.classList.contains("bg-poem")) {
+            createFloatingHeart();
+        }
+    }, 100);
 }
 
 //#endregion
